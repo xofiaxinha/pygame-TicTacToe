@@ -117,7 +117,7 @@ def checkWinner(board):
         for i in range(3):
             for j in range(3):
                 if board[i][j] == winner:
-                    graphical_board[i][j][0] = X_WIN
+                    graphical_board[i][j][0] = X_WIN if winner == 'X' else O_WIN
                     WIN.blit(graphical_board[i][j][0], graphical_board[i][j][1])
         pygame.display.update()
         return winner
