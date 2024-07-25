@@ -6,10 +6,13 @@ pygame.init()
 WIDTH, HEIGHT = 700, 700
 BG_COLOR = (230, 172, 182)
 #loading assets
-BOARD = pygame.image.load('assets/Board.png')
-BOARD = pygame.transform.scale(BOARD, (WIDTH-100, HEIGHT-100))
-X = pygame.image.load('assets/X.png')
-O = pygame.image.load('assets/O.png')
+BOARD = pygame.image.load('assets/newboard.png')
+X = pygame.image.load('assets/newx.png')
+X = pygame.transform.scale(X, (150, 150))
+O = pygame.image.load('assets/newo.png')
+O = pygame.transform.scale(O, (150, 150))
+X_WIN = pygame.image.load('assets/xwin.png')
+O_WIN = pygame.image.load('assets/owin.png')
 #creating the window
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 WIN.fill((BG_COLOR))
