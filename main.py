@@ -1,6 +1,5 @@
 import pygame
 import random
-import time
 
 pygame.init()
 
@@ -64,6 +63,7 @@ def pcMove(board):
         for j in range(3):
             if graphical_board[i][j][0] != None:
                 WIN.blit(graphical_board[i][j][0], graphical_board[i][j][1])
+
     return board
     
 def addXO(board, graphical_board, player):
@@ -80,6 +80,9 @@ def addXO(board, graphical_board, player):
         for j in range(3):
             if graphical_board[i][j][0] != None:
                 WIN.blit(graphical_board[i][j][0], graphical_board[i][j][1])
+
+    if((checkWinner(board) == None) and (not checkDraw(board))):
+        board = pcMove(board)
 
     return board, player
 
@@ -130,9 +133,6 @@ while run:
             if game_over:
                 board, graphical_board = resetGame(board, graphical_board)
                 game_over = False
-            else:
-                board = pcMove(board)
-
             if checkDraw(board):
                 game_over = True
             if checkWinner(board) != None:
