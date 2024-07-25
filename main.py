@@ -90,6 +90,13 @@ def checkWinner(board):
 
     return None
 
+def checkDraw(board):
+    for i in range(3):
+        for j in range(3):
+            if board[i][j] == -1:
+                return False
+    return True
+
 def resetGame(board, graphical_board):
     board = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]]
     graphical_board = [[[None, None], [None, None], [None, None]], 
@@ -110,6 +117,8 @@ while run:
             if game_over:
                 board, graphical_board = resetGame(board, graphical_board)
                 game_over = False
+            if checkDraw(board):
+                game_over = True
             if checkWinner(board) != None:
                 game_over = True
 
