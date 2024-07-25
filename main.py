@@ -31,10 +31,10 @@ def renderBoard(board, ximg, oimg):
             if board[i][j] == 'X':
                 # Create an X image and rect
                 graphical_board[i][j][0] = ximg
-                graphical_board[i][j][1] = ximg.get_rect(topleft=(board_positions_x[i][0]+20, board_positions_y[j][0]+30))
+                graphical_board[i][j][1] = ximg.get_rect(center=(round((board_positions_x[i][0]+board_positions_x[i][1])/2), round((board_positions_y[j][0]+board_positions_y[j][1])/2)))
             elif board[i][j] == 'O':
                 graphical_board[i][j][0] = oimg
-                graphical_board[i][j][1] = oimg.get_rect(topleft=(board_positions_x[i][0]+20, board_positions_y[j][0]+30))
+                graphical_board[i][j][1] = oimg.get_rect(center=(round((board_positions_x[i][0]+board_positions_x[i][1])/2), round((board_positions_y[j][0]+board_positions_y[j][1])/2)))
 def findX(xpos):
     if(xpos<230):
         return 0
