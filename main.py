@@ -1,5 +1,6 @@
 import pygame
 import random
+import time
 
 pygame.init()
 
@@ -19,6 +20,7 @@ O_WIN = pygame.transform.scale(O_WIN, (150, 150))
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 WIN.fill((BG_COLOR))
 WIN.blit(BOARD, (50, 50))
+validMove = False
 pygame.display.set_caption("First Game")
 player = 'X'
 game_over = False
@@ -69,17 +71,16 @@ def pcMove(board, valid):
         for j in range(3):
             if graphical_board[i][j][0] != None:
                 WIN.blit(graphical_board[i][j][0], graphical_board[i][j][1])
-
     return board
     
-def addXO(board, graphical_board, player):
+def addXO(board, graphical_board, valid):
     valid = False
     #gets the mouse position
     current_pos = pygame.mouse.get_pos()
     xpos, ypos = current_pos
     #checks the board
     if(board[findX(xpos)][findY(ypos)]==-1):
-        board[findX(xpos)][findY(ypos)] = player
+        board[findX(xpos)][findY(ypos)] = 'X'
         valid = True
      #   board[round(converted_x), round(converted_y)] = player
     renderBoard(board, X, O)
@@ -89,10 +90,7 @@ def addXO(board, graphical_board, player):
             if graphical_board[i][j][0] != None:
                 WIN.blit(graphical_board[i][j][0], graphical_board[i][j][1])
 
-    if((checkWinner(board) == None) and (not checkDraw(board))):
-        board = pcMove(board, valid)
-
-    return board, player
+    return board, valid
 
 def checkWinner(board):
     winner = None
@@ -146,7 +144,10 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            board, player = addXO(board, graphical_board, player)
+            board, validMove = addXO(board, graphical_board, validMove)
+            if((checkWinner(board) == None) and (not checkDraw(board))):
+                board = pcMove(board, validMove)
+                validMove = False
             if game_over:
                 board, graphical_board = resetGame(board, graphical_board)
                 game_over = False
