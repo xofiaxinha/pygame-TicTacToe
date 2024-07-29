@@ -3,17 +3,7 @@ from button import Button
 
 pygame.init()
 
-screen = pygame.display.set_mode((700, 700))
-pygame.display.set_caption("Menu")
-
-def play():
-    #TODO: Add the main code here
-    print("Play")
-def options():
-    print("Options")
-
-
-def main_menu():
+def main_menu(screen, play, options):
     while True:
         screen.fill((255, 255, 255))
         mouse_pos = pygame.mouse.get_pos()
@@ -38,5 +28,3 @@ def main_menu():
                     pygame.quit()
                     exit()
         pygame.display.update()
-
-main_menu()
