@@ -146,9 +146,11 @@ def mainGame():
     WIN.fill((BG_COLOR))
     WIN.blit(BOARD, (50, 50))
     quitButton = Button(image=BUTTON, x=350, y=600, text="Quit")
+    quit_button_active = False
     global run, validMove, game_over, board, graphical_board, board_positions_x, board_positions_y, X, O, X_WIN, O_WIN, current_screen
     board, graphical_board = resetGame(board, graphical_board)
     game_over = False
+    run = True
     while run:
         quitButton.onHoverButton(pygame.mouse.get_pos())
         for event in pygame.event.get():
@@ -164,12 +166,13 @@ def mainGame():
                     game_over = True
                 if checkWinner(board) != None:
                     game_over = True
-                if quitButton.onClickButton(pygame.mouse.get_pos()) and game_over:
+                if quitButton.onClickButton(pygame.mouse.get_pos()) and game_over and quit_button_active:
                     run = False
                     current_screen = "menu"
+                    game_over = False
             if game_over:
                 quitButton.draw(WIN)
-                game_over = False
+                quit_button_active = True
             pygame.display.update()
 
 
