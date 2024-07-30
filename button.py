@@ -11,7 +11,7 @@ class Button():
         #making a rect object for the button
         self.rect = self.image.get_rect(center=(x, y))
         self.text = text
-        self.text_surface = main_font.render(text, True, (204, 41, 68))
+        self.text_surface = main_font.render(text, True, (153, 16, 62))
         self.text_rect = self.text_surface.get_rect(center=(x, y))
     
     def draw(self, screen):
@@ -26,5 +26,5 @@ class Button():
             self.image = pygame.image.load('assets/buttonhover.png')
             self.text_surface = main_font.render(self.text, True, (231, 214, 207))
         else:
-            self.text_surface = main_font.render(self.text, True, (204, 41, 68))
+            self.text_surface = main_font.render(self.text, True, (153, 16, 62))
             self.image = pygame.image.load('assets/button.png')
