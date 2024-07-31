@@ -16,6 +16,8 @@ X_WIN = pygame.transform.scale(X_WIN, (150, 150))
 O_WIN = pygame.image.load('assets/owin.png')
 O_WIN = pygame.transform.scale(O_WIN, (150, 150))
 BUTTON = pygame.image.load('assets/button.png')
+MENU_BG = pygame.image.load('assets/menu-bg.png')
+GAME_BG = pygame.image.load('assets/game-bg.png')
 #creating the window
 WIDTH, HEIGHT = 700, 700
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -143,16 +145,19 @@ def resetBoard():
 
 def mainGame():
     resetBoard()
-    WIN.fill((BG_COLOR))
+    WIN.blit(GAME_BG, (0, 0))
     WIN.blit(BOARD, (50, 50))
     quitButton = Button(image=BUTTON, x=350, y=600, text="Quit")
+    replayButton = Button(image=BUTTON, x=350, y=450, text="Play again")
     quit_button_active = False
+    replay_button_active = False
     global run, validMove, game_over, board, graphical_board, board_positions_x, board_positions_y, X, O, X_WIN, O_WIN, current_screen
     board, graphical_board = resetGame(board, graphical_board)
     game_over = False
     run = True
     while run:
         quitButton.onHoverButton(pygame.mouse.get_pos())
+        replayButton.onHoverButton(pygame.mouse.get_pos())
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -170,9 +175,19 @@ def mainGame():
                     run = False
                     current_screen = "menu"
                     game_over = False
+                if replayButton.onClickButton(pygame.mouse.get_pos()) and game_over and replay_button_active:
+                    replay_button_active = False
+                    quit_button_active = False
+                    board, graphical_board = resetGame(board, graphical_board)
+                    game_over = False
+                    resetBoard()
+                    WIN.blit(GAME_BG, (0, 0))
+                    WIN.blit(BOARD, (50, 50))
             if game_over:
+                replayButton.draw(WIN)
                 quitButton.draw(WIN)
                 quit_button_active = True
+                replay_button_active = True
             pygame.display.update()
 
 
@@ -182,7 +197,7 @@ def options():
 def main_menu(screen, play, options):
     global run, current_screen
     while True:
-        screen.fill((255, 255, 255))
+        WIN.blit(MENU_BG, (0, 0))
         mouse_pos = pygame.mouse.get_pos()
         playButton = Button(image=BUTTON, x=350, y=300, text="Play")
         optionsButton = Button(image=BUTTON, x=350, y=450, text="Options")
