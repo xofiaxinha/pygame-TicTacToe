@@ -20,9 +20,10 @@ pip install pygame
 ## Playing the game
 1. Start the game
 ``` bash
-python main.py
+python game.py
 ```
-2. Click in any square.
+2. Click on the "Play" button to start the game
+3. Click in any square.
    - As you do this, the computer will make its move.
    - Wins the one who aligns three pieces in a line, column or diagonal
   
@@ -45,6 +46,9 @@ python main.py
         O = pygame.image.load('assets/newo.png')
         X_WIN = pygame.image.load('assets/xwin.png')
         O_WIN = pygame.image.load('assets/owin.png')
+        BUTTON = pygame.image.load('assets/button.png')
+        MENU_BG = pygame.image.load('assets/menu-bg.png')
+        GAME_BG = pygame.image.load('assets/game-bg.png')
         ```
         - If necessary, you can scale the assets to fit the screen using ```pygame.transform.scale(variable, (x dimension, y dimension))```.
     - Create the variables for the board
@@ -112,7 +116,9 @@ python main.py
    - Finally, it returns the new board.
   
 ## Final considerations
-- This project heavily referenced [this video](https://www.youtube.com/watch?v=IL_PMGVxEUY&list=WL&index=3) by [baraltech](https://www.youtube.com/@baraltech) as a guide to both the project and PyGame.
-  - You can find their project [here](https://github.com/baraltech/Tic-Tac-Toe)!
+- This project heavily referenced [this video](https://www.youtube.com/watch?v=IL_PMGVxEUY&list=WL&index=3) and [this video](https://www.youtube.com/watch?v=GMBqjxcKogA&pp=ugMICgJwdBABGAHKBQliYXJhbHRlY2g%3D) by [baraltech](https://www.youtube.com/@baraltech) as a guide to both the project and PyGame.
+  - You can find their project [here](https://github.com(https://www.youtube.com/watch?v=GMBqjxcKogA&pp=ugMICgJwdBABGAHKBQliYXJhbHRlY2g%3D)/baraltech/Tic-Tac-Toe)!
+- But, despite the heavy referencing, I had a lot of problems especially after I included the menu, because of buttons not working or the oddly specific bug of the game closing after the player make their last move on the 7th square (3rd line, 2nd column).
+  - It was because the button was being rendered as soon as the game recognized the victory, not giving time for the player to see and click the "Quit" button 😉.
 - Alongside the video, I also used a project using HTML, CSS and JavaScript of the same game that I've made a few months ago (and forgot to upload to GitHub 🤭).
 - Any contribuitions are welcome! Feel free to open issues and pull requests to make the project even better.
